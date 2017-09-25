@@ -1,0 +1,46 @@
+{
+  "type" : "index",
+  "spec" : {
+    "dataSchema" : {
+      "dataSource" : "sample",
+      "parser" : {
+        "type" : "string",
+        "parseSpec" : {
+          "format" : "json",
+          "dimensionsSpec" : {
+            "dimensions" : ["state","city"]
+          },
+          "timestampSpec" : {
+            "format" : "auto",
+            "column" : "time"
+          }
+        }
+      },
+      "metricsSpec" : [
+	{"name" : "value","type" : "doubleSum","fieldName" : "value"}
+      ],
+      "granularitySpec" : {
+        "type" : "uniform",
+        "segmentGranularity" : "day",
+        "queryGranularity" : "none",
+        "intervals" : ["2006-12-01T00:00:00Z/2018-06-30T00:00:00Z"],
+        "rollup" : true
+      }
+    },
+    "ioConfig" : {
+      "type" : "index",
+      "firehose" : {
+        "type" : "local",
+        "baseDir" : "quickstart/",
+        "filter" : "sample.json"
+      },
+      "appendToExisting" : false
+    },
+    "tuningConfig" : {
+      "type" : "index",
+      "targetPartitionSize" : 10000000,
+      "maxRowsInMemory" : 40000,
+      "forceExtendableShardSpecs" : true
+    }
+  }
+}

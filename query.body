@@ -1,0 +1,12 @@
+{
+   "queryType":"groupBy",
+   "dataSource":"leapfrog",
+   "granularity":"all",
+   "dimensions":[
+
+   ],
+   "aggregations":[{"name":"!T_1","type":"count","fieldName":"rows"},{"name":"!T_2","type":"doubleSum","fieldName":"Target DOS"}],"postAggregations":[{"type":"arithmetic","fn":"*","fields":[{"type":"arithmetic","fn":"/","fields":[{"type":"fieldAccess","fieldName":"!T_2"},
+
+{"type":"fieldAccess","fieldName":"!T_1"}]},{"type":"constant","value":1}],"name":"Avg DOS"}],
+"intervals":["2006-01-01T00:00:00.000Z/2020-01-01T00:00:00.000Z"]
+}

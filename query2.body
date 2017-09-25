@@ -1,0 +1,22 @@
+{
+   "queryType":"groupBy",
+   "dataSource":"ofirmev",
+   "granularity":"all",
+   "dimensions":[],
+   "aggregations":[{"name":"rows","type":"count","fieldName":"rows"},
+{"name":"Units","type":"longSum","fieldName":"Units"}],"postAggregations":[
+
+
+{
+  "type": "javascript",
+  "name": "Average Units",
+  "fieldNames": ["Units", "rows"],
+  "function": "function(Units, rows) { return Math.abs(Units) / rows; }"
+}
+
+],
+   "intervals":[
+      "2006-01-01T00:00:00.000Z/2020-01-01T00:00:00.000Z"
+   ]
+}
+

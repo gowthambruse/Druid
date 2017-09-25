@@ -1,0 +1,21 @@
+{
+   "queryType":"groupBy",
+   "dataSource":"leapfrog",
+   "granularity":"all",
+   "dimensions":[],
+   "aggregations":[{"name":"rows","type":"count","fieldName":"rows"},
+{"name":"TargetDOS","type":"doubleSum","fieldName":"Target DOS"}],"postAggregations":[
+
+
+{
+  "type": "javascript",
+  "name": "Target DOS Average",
+  "fieldNames": ["TargetDOS", "rows"],
+  "function": "function(TargetDOS, rows) { return Math.abs(TargetDOS) / rows; }"
+}
+
+],
+   "intervals":[
+      "2006-01-01T00:00:00.000Z/2020-01-01T00:00:00.000Z"
+   ]
+}
