@@ -1,37 +1,35 @@
-# Druid
-
-@@@@@Imply Pivot Install  @@@@@      
+﻿ *** Imply Pivot Install   ***       
 tar -xzf imply-2.2.3.tar.gz
 cd imply-2.2.3
 
-@@@@@Start@@@@@
+ *** Start *** 
 
 bin/supervise -c conf/supervise/quickstart.conf
 
-@@@@@Post the Index.json@@@@@
+ *** Post the Index.json *** 
 
 bin/post-index-task --file quickstart/wikiticker-index.json
 
 
-@@@@@Zookeeper Install @@@@@
+ *** Zookeeper Install  *** 
 
 curl http://www.gtlib.gatech.edu/pub/apache/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz -o zookeeper-3.4.6.tar.gz
 tar -xzf zookeeper-3.4.6.tar.gz
 
-@@@@@Start@@@@@
+ *** Start *** 
 
 cd zookeeper-3.4.6
 cp conf/zoo_sample.cfg conf/zoo.cfg
 ./bin/zkServer.sh start
 
 
-@@@@@Druid Install@@@@@
+ *** Druid Install *** 
 
 curl -O http://static.druid.io/artifacts/releases/druid-0.10.0-bin.tar.gz
 tar -xzf druid-0.10.0-bin.tar.gz
 cd druid-0.10.0
 
-@@@@@Start@@@@@
+ *** Start *** 
 
 java `cat conf-quickstart/druid/historical/jvm.config | xargs` -cp "conf-quickstart/druid/_common:conf-quickstart/druid/historical:lib/*" io.druid.cli.Main server historical
 java `cat conf-quickstart/druid/broker/jvm.config | xargs` -cp "conf-quickstart/druid/_common:conf-quickstart/druid/broker:lib/*" io.druid.cli.Main server broker
@@ -40,12 +38,12 @@ java `cat conf-quickstart/druid/overlord/jvm.config | xargs` -cp "conf-quickstar
 java `cat conf-quickstart/druid/middleManager/jvm.config | xargs` -cp "conf-quickstart/druid/_common:conf-quickstart/druid/middleManager:lib/*" io.druid.cli.Main server middleManager
 
 
-@@@@@Submit the query via curl@@@@@
+ *** Submit the query via curl *** 
 
 curl -X POST "http://localhost:8082/druid/v2/?pretty" \ -H 'content-type: application/json' -d @query.body
 
 
-@@@@@Sample Query@@@@@
+ *** Sample Query *** 
 
 {
     "queryType": "groupBy",
@@ -61,13 +59,13 @@ curl -X POST "http://localhost:8082/druid/v2/?pretty" \ -H 'content-type: applic
 }
 
 
-@@@@@Delete the Data Source  Query@@@@@
+ *** Delete the Data Source  Query *** 
 
 
 curl -XDELETE http://localhost:8081/druid/coordinator/v1/datasources/Jmatek_June_2017
 
 
-@@@@@Average Query [leapfrog]@@@@@
+ *** Average Query [leapfrog] *** 
 
 
 {
@@ -81,7 +79,7 @@ curl -XDELETE http://localhost:8081/druid/coordinator/v1/datasources/Jmatek_June
 }
 
 
-@@@@@JavaScript Query For druid Aggregation@@@@@
+ *** JavaScript Query For druid Aggregation *** 
 
 {
    "queryType":"groupBy",
